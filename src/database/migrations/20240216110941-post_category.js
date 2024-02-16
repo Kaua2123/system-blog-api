@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    queryInterface.createTable('post_categories', {
+    queryInterface.createTable('post_category', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -17,5 +17,5 @@ module.exports = {
     });
   },
 
-  // async down(queryInterface, Sequelize) {},
+  async down(queryInterface, Sequelize) {},
 };

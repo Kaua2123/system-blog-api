@@ -40,6 +40,14 @@ Post.init(
         key: 'id',
       },
     },
+    post_category_id: {
+      type: sequelize.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'post_category',
+        key: 'id',
+      },
+    },
     title: {
       type: sequelize.STRING,
       allowNull: false,

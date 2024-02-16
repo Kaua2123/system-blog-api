@@ -18,6 +18,14 @@ module.exports = {
           key: 'id',
         },
       },
+      post_category_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'post_category',
+          key: 'id',
+        },
+      },
       title: {
         type: Sequelize.STRING,
         allowNull: false,
