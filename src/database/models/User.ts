@@ -1,14 +1,13 @@
 import sequelize from 'sequelize';
 import db from '.';
 import { Model } from 'sequelize';
+import Post from './Post';
 
 class User extends Model {
   declare id: number;
   declare username: string;
   declare email: string;
   declare password_hash: string;
-  declare created_at: Date;
-  declare updated_at: Date;
 }
 
 User.init(
@@ -37,7 +36,12 @@ User.init(
   {
     sequelize: db,
     tableName: 'user',
+    timestamps: false,
   },
 );
+
+User.hasMany(Post, {
+  foreignKey: 'user_id',
+});
 
 export default User;
