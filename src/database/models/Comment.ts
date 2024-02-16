@@ -2,8 +2,6 @@ import sequelize from 'sequelize';
 import { Model } from 'sequelize';
 
 import db from '.';
-import User from './User';
-import Post from './Post';
 
 class Comment extends Model {
   declare id: number;
@@ -46,13 +44,5 @@ Comment.init(
     timestamps: false,
   },
 );
-
-Comment.belongsTo(User, {
-  foreignKey: 'user_id',
-});
-
-Comment.belongsTo(Post, {
-  foreignKey: 'post_id',
-});
 
 export default Comment;
