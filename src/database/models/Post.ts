@@ -1,7 +1,9 @@
 import sequelize from 'sequelize';
-import db from '.';
 import { Model } from 'sequelize';
+
+import db from '.';
 import User from './User';
+import Comment from './Comment';
 
 interface ENUM {
   TECNOLOGIA: string;
@@ -82,6 +84,10 @@ Post.init(
 Post.belongsTo(User, {
   foreignKey: 'user_id',
   as: 'posts',
+});
+
+Post.hasMany(Comment, {
+  foreignKey: 'post_id',
 });
 
 export default Post;

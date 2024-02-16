@@ -1,7 +1,9 @@
 import sequelize from 'sequelize';
-import db from '.';
 import { Model } from 'sequelize';
+
+import db from '.';
 import Post from './Post';
+import Comment from './Comment';
 
 class User extends Model {
   declare id: number;
@@ -41,6 +43,10 @@ User.init(
 );
 
 User.hasMany(Post, {
+  foreignKey: 'user_id',
+});
+
+User.hasMany(Comment, {
   foreignKey: 'user_id',
 });
 
