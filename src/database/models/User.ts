@@ -33,14 +33,6 @@ User.init(
       type: sequelize.STRING,
       allowNull: false,
     },
-    created_at: {
-      type: sequelize.DATE,
-      allowNull: false,
-    },
-    updated_at: {
-      type: sequelize.DATE,
-      allowNull: false,
-    },
   },
   {
     sequelize: db,
