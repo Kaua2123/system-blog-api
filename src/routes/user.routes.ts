@@ -3,7 +3,8 @@ import { Router } from 'express';
 
 const userRouter = Router();
 
-userRouter.get('/user', UserController.index); // bind pro this dentro do userController
+userRouter.get('/user', UserController.index);
+userRouter.get('/user/:id', UserController.show);
 userRouter.post('/user/post', UserController.store);
 
 export default userRouter;

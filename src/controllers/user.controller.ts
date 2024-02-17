@@ -11,6 +11,17 @@ class UserController {
       next(error);
     }
   }
+
+  async show(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const user = await User.findByPk(id);
+      return res.status(200).json(user);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   async store(req: Request, res: Response, next: NextFunction) {
     try {
       const createdUser = await User.create(req.body);
