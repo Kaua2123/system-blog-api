@@ -11,6 +11,16 @@ class PostController {
       next(error);
     }
   }
+
+  async show(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const post = await Post.findByPk(id);
+      return res.status(200).json(post);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default new PostController();
