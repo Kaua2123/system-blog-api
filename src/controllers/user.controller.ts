@@ -1,13 +1,20 @@
 import { NextFunction, Request, Response } from 'express';
-import UserService from '../services/user.service';
+
+import User from '../database/models/User';
 
 class UserController {
-  private service = new UserService();
-
   async index(req: Request, res: Response, next: NextFunction) {
     try {
-      const { status, message } = await this.service.index();
-      return res.status(status).json(message);
+      const user = await User.findAll();
+      return res.status(200).json(user);
+    } catch (error) {
+      next(error);
+    }
+  }
+  async store(req: Request, res: Response, next: NextFunction) {
+    try {
+      const createdUser = await User.create(req.body);
+      return res.status(200).json(createdUser);
     } catch (error) {
       next(error);
     }

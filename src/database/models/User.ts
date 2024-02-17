@@ -1,5 +1,6 @@
 import sequelize from 'sequelize';
 import { Model } from 'sequelize';
+import bcrypt from 'bcrypt';
 
 import db from '.';
 import Post from './Post';
@@ -9,6 +10,7 @@ class User extends Model {
   declare id: number;
   declare username: string;
   declare email: string;
+  declare password: string;
   declare password_hash: string;
 }
 
@@ -29,10 +31,24 @@ User.init(
       type: sequelize.STRING,
       allowNull: false,
       unique: true,
+      validate: {
+        isEmail: {
+          msg: 'Email inválido',
+        },
+      },
     },
     password_hash: {
       type: sequelize.STRING,
-      allowNull: false,
+    },
+    password: {
+      type: sequelize.VIRTUAL,
+      defaultValue: '',
+      validate: {
+        len: {
+          args: [3, 24],
+          msg: 'Senha deve ter entre 3 e 24 caracteres',
+        },
+      },
     },
   },
   {
@@ -41,6 +57,10 @@ User.init(
     timestamps: false,
   },
 );
+
+User.addHook('beforeSave', async (user: User) => {
+  user.password_hash = await bcrypt.hash(user.password, 8);
+});
 
 User.hasMany(Post, {
   foreignKey: 'user_id',
