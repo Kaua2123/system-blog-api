@@ -14,15 +14,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
-          model: 'user',
-          key: 'id',
-        },
-      },
-      post_category_id: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        references: {
-          model: 'post_category',
+          model: 'users',
           key: 'id',
         },
       },
@@ -55,6 +47,7 @@ module.exports = {
           'CULTURA',
           'VIAGENS',
           'ESPORTE',
+          'GEEK',
         ],
         allowNull: false,
         defaultValue: 'TECNOLOGIA',

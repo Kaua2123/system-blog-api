@@ -1,6 +1,8 @@
 import sequelize from 'sequelize';
 import { Model } from 'sequelize';
 
+import Comment from './Comment';
+
 import db from '.';
 
 interface ENUM {
@@ -10,6 +12,7 @@ interface ENUM {
   CULTURA: string;
   VIAGENS: string;
   ESPORTE: string;
+  GEEK: string;
 }
 
 class Post extends Model {
@@ -30,22 +33,14 @@ Post.init(
       allowNull: false,
       primaryKey: true,
     },
-    user_id: {
-      type: sequelize.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'user',
-        key: 'id',
-      },
-    },
-    post_category_id: {
-      type: sequelize.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'post_category',
-        key: 'id',
-      },
-    },
+    // userId: {
+    //   type: sequelize.INTEGER,
+    //   allowNull: true,
+    //   references: {
+    //     model: 'user',
+    //     key: 'id',
+    //   },
+    // },
     title: {
       type: sequelize.STRING,
       allowNull: false,
@@ -75,6 +70,7 @@ Post.init(
         'CULTURA',
         'VIAGENS',
         'ESPORTE',
+        'GEEK',
       ],
       allowNull: false,
       defaultValue: 'TECNOLOGIA',
@@ -87,5 +83,11 @@ Post.init(
     underscored: true,
   },
 );
+
+Post.hasMany(Comment, {
+  foreignKey: 'post_id',
+});
+
+Comment.belongsTo(Post);
 
 export default Post;

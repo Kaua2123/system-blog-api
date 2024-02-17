@@ -21,6 +21,16 @@ class PostController {
       next(error);
     }
   }
+
+  async store(req: Request, res: Response, next: NextFunction) {
+    try {
+      const createdPost = await Post.create(req.body);
+
+      return res.status(200).json(createdPost);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default new PostController();

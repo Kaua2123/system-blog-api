@@ -53,9 +53,8 @@ User.init(
   },
   {
     sequelize: db,
-    tableName: 'user',
+    tableName: 'users',
     timestamps: false,
-    underscored: true,
   },
 );
 
@@ -67,12 +66,16 @@ User.hasMany(Post, {
   foreignKey: 'user_id',
 });
 
-Post.belongsTo(User);
+Post.belongsTo(User, {
+  foreignKey: 'user_id',
+});
 
 User.hasMany(Comment, {
   foreignKey: 'user_id',
 });
 
-Comment.belongsTo(User);
+Comment.belongsTo(User, {
+  foreignKey: 'user_id',
+});
 
 export default User;

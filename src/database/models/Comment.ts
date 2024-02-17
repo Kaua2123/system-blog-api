@@ -18,7 +18,7 @@ Comment.init(
       allowNull: false,
       primaryKey: true,
     },
-    user_id: {
+    userId: {
       type: sequelize.INTEGER,
       allowNull: true,
       references: {
@@ -26,7 +26,7 @@ Comment.init(
         key: 'id',
       },
     },
-    post_id: {
+    postId: {
       type: sequelize.INTEGER,
       allowNull: true,
       references: {
