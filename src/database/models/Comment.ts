@@ -18,22 +18,6 @@ Comment.init(
       allowNull: false,
       primaryKey: true,
     },
-    userId: {
-      type: sequelize.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'user',
-        key: 'id',
-      },
-    },
-    postId: {
-      type: sequelize.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'posts',
-        key: 'id',
-      },
-    },
     content: {
       type: sequelize.STRING,
     },

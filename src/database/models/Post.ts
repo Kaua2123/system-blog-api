@@ -17,7 +17,6 @@ interface ENUM {
 
 class Post extends Model {
   declare id: number;
-  declare user_id: number;
   declare title: string;
   declare content: string;
   declare image: string; // URL
@@ -33,14 +32,6 @@ Post.init(
       allowNull: false,
       primaryKey: true,
     },
-    // userId: {
-    //   type: sequelize.INTEGER,
-    //   allowNull: true,
-    //   references: {
-    //     model: 'user',
-    //     key: 'id',
-    //   },
-    // },
     title: {
       type: sequelize.STRING,
       allowNull: false,
@@ -88,6 +79,8 @@ Post.hasMany(Comment, {
   foreignKey: 'post_id',
 });
 
-Comment.belongsTo(Post);
+Comment.belongsTo(Post, {
+  foreignKey: 'post_id',
+});
 
 export default Post;
