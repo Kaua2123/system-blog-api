@@ -84,6 +84,7 @@ Post.init(
     sequelize: db,
     tableName: 'posts',
     timestamps: false,
+    underscored: true,
   },
 );
 
