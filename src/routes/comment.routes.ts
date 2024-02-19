@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import loginRequired from 'middlewares/login.required';
+import loginRequired from '../middlewares/login.required';
 import CommentController from '../controllers/comment.controller';
 import { Router } from 'express';
 

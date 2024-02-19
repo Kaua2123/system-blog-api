@@ -1,4 +1,4 @@
-import loginRequired from 'middlewares/login.required';
+import loginRequired from '../middlewares/login.required';
 import UserController from '../controllers/user.controller';
 import { Router } from 'express';
 
