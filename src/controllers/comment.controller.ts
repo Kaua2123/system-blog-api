@@ -11,6 +11,7 @@ class CommentController {
       next(error);
     }
   }
+
   async show(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
@@ -21,7 +22,40 @@ class CommentController {
       next(error);
     }
   }
-  async store() {}
+
+  async store(req: Request, res: Response, next: NextFunction) {
+    try {
+      const newComment = await Comment.create(req.body);
+
+      return res.status(200).json(newComment);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async update(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const comment = await Comment.findByPk(id);
+      const updatedComment = await comment?.update(req.body);
+
+      return res.status(200).json(updatedComment);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async delete(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const comment = await Comment.findByPk(id);
+      await comment?.destroy();
+
+      return res.status(200).json(null);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default new CommentController();
