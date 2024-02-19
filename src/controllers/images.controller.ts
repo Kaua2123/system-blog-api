@@ -7,7 +7,7 @@ class ImagesController {
       const { id } = req.params;
       const post = await Post.findByPk(id);
       console.log(id);
-      if (!post) return res.status(400).json('Post dont encountered');
+      if (!post) return res.status(400).json('The post doesnt exist ');
 
       await post.update(
         { image: req.file?.filename },
