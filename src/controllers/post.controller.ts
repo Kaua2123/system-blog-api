@@ -75,6 +75,23 @@ class PostController {
       next(error);
     }
   }
+
+  async findByTags(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { tags } = req.params;
+      const posts = await Post.findAll({
+        where: {
+          tags,
+        },
+      });
+
+      if (!posts) return res.status(404).json('No posts found');
+
+      return res.status(200).json(posts);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default new PostController();
