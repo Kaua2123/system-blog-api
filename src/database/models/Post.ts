@@ -4,6 +4,7 @@ import { Model } from 'sequelize';
 import Comment from './Comment';
 
 import db from '.';
+import Likes from './Likes';
 
 interface ENUM {
   TECNOLOGIA: string;
@@ -76,6 +77,14 @@ Post.init(
 );
 
 Post.hasMany(Comment, {
+  foreignKey: 'post_id',
+});
+
+Post.hasMany(Likes, {
+  foreignKey: 'post_id',
+});
+
+Likes.belongsTo(Post, {
   foreignKey: 'post_id',
 });
 

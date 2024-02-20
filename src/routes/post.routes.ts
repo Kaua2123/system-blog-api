@@ -9,7 +9,11 @@ postRouter.get('/post/:tags', PostController.findByTags);
 postRouter.get('/post/:id', PostController.show);
 postRouter.post('/post/create', loginRequired, PostController.store);
 postRouter.put('/post/update/:id', loginRequired, PostController.update);
-postRouter.put('/post/like/:id', loginRequired, PostController.like);
+postRouter.put(
+  '/post/like/:postId/:userId',
+  loginRequired,
+  PostController.like,
+);
 postRouter.delete('/post/delete/:id', loginRequired, PostController.delete);
 
 export default postRouter;

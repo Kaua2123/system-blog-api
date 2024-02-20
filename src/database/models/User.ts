@@ -5,6 +5,7 @@ import bcrypt from 'bcrypt';
 import db from '.';
 import Post from './Post';
 import Comment from './Comment';
+import Likes from './Likes';
 
 class User extends Model {
   declare id: number;
@@ -66,15 +67,23 @@ User.hasMany(Post, {
   foreignKey: 'user_id',
 });
 
-Post.belongsTo(User, {
-  foreignKey: 'user_id',
-});
-
 User.hasMany(Comment, {
   foreignKey: 'user_id',
 });
 
+User.hasMany(Likes, {
+  foreignKey: 'user_id',
+});
+
+Post.belongsTo(User, {
+  foreignKey: 'user_id',
+});
+
 Comment.belongsTo(User, {
+  foreignKey: 'user_id',
+});
+
+Likes.belongsTo(User, {
   foreignKey: 'user_id',
 });
 

@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import Post from '../database/models/Post';
+import Likes from '../database/models/Likes';
 
 class PostController {
   async index(req: Request, res: Response, next: NextFunction) {
@@ -62,13 +63,24 @@ class PostController {
 
   async like(req: Request, res: Response, next: NextFunction) {
     try {
-      const { id } = req.params;
-      const post = await Post.findByPk(id);
-      console.log(id);
+      const { postId, userId } = req.params;
+
+      const post = await Post.findByPk(postId);
       if (!post) return res.status(400).json('The post doesnt exist ');
+
+      const likes = await Likes.findOne({
+        where: {
+          user_id: userId,
+          post_id: postId,
+        },
+      });
+      if (likes) return res.status(400).json('You already liked this post.');
+
       const like = post.likes + 1;
 
       await post.update({ likes: like }, { where: { likes: 0 } });
+
+      await Likes.create({ user_id: userId, post_id: postId });
 
       return res.status(200).json(post);
     } catch (error) {
@@ -79,6 +91,7 @@ class PostController {
   async findByTags(req: Request, res: Response, next: NextFunction) {
     try {
       const { tags } = req.params;
+
       const posts = await Post.findAll({
         where: {
           tags,
