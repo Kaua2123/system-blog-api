@@ -1,11 +1,30 @@
 import { NextFunction, Request, Response } from 'express';
 import Post from '../database/models/Post';
+import Comment from '../database/models/Comment';
 import Likes from '../database/models/Likes';
 
 class PostController {
   async index(req: Request, res: Response, next: NextFunction) {
     try {
-      const posts = await Post.findAll();
+      const posts = await Post.findAll({
+        attributes: [
+          'id',
+          'user_id',
+          'title',
+          'content',
+          'image',
+          'likes',
+          'tags',
+        ],
+        order: [
+          ['id', 'DESC'],
+          [Comment, 'id', 'DESC'],
+        ],
+        include: {
+          model: Comment,
+          attributes: ['content'],
+        },
+      });
 
       return res.status(200).json(posts);
     } catch (error) {
