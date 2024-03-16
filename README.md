@@ -1,4 +1,4 @@
-# System Blog Api
+# System Blog Api - Social Blog
 
 
 ## 📝 Descrição
