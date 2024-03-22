@@ -38,6 +38,8 @@ class PostController {
 
       const post = await Post.findByPk(id);
 
+      console.log('checando post com show:', post);
+
       return res.status(200).json(post);
     } catch (error) {
       next(error);
