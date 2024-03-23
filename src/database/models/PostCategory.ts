@@ -27,3 +27,5 @@ PostCategories.init(
     timestamps: false,
   },
 );
+
+export default PostCategories;

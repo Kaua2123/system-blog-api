@@ -48,6 +48,12 @@ Post.init(
       allowNull: false,
       defaultValue: '',
     },
+    image_url: {
+      type: sequelize.VIRTUAL,
+      get() {
+        return `http://localhost:3001/images/${this.getDataValue('image')}`;
+      },
+    },
     likes: {
       type: sequelize.INTEGER,
       allowNull: false,

@@ -36,7 +36,25 @@ class PostController {
     try {
       const { id } = req.params;
 
-      const post = await Post.findByPk(id);
+      const post = await Post.findByPk(id, {
+        attributes: [
+          'id',
+          'user_id',
+          'title',
+          'content',
+          'image',
+          'likes',
+          'tags',
+        ],
+        order: [
+          ['id', 'DESC'],
+          [Comment, 'id', 'DESC'],
+        ],
+        include: {
+          model: Comment,
+          attributes: ['content'],
+        },
+      });
 
       console.log('checando post com show:', post);
 
