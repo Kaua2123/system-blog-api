@@ -24,7 +24,7 @@ module.exports = {
         defaultValue: '',
       },
       content: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false,
         defaultValue: '',
       },

@@ -46,11 +46,9 @@ User.init(
       },
     },
     password_hash: {
-      allowNull: false,
       type: sequelize.STRING,
     },
     password: {
-      allowNull: false,
       type: sequelize.VIRTUAL,
       defaultValue: '',
       validate: {

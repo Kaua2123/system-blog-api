@@ -66,7 +66,7 @@ class PostController {
           },
           {
             model: User,
-            attributes: ['username', 'image', 'image_url'],
+            attributes: ['name', 'username', 'image', 'image_url'],
           },
         ],
       });

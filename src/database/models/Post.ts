@@ -39,7 +39,7 @@ Post.init(
       defaultValue: '',
     },
     content: {
-      type: sequelize.STRING,
+      type: sequelize.TEXT,
       allowNull: false,
       defaultValue: '',
     },
