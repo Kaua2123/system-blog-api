@@ -7,7 +7,7 @@ class ImagesController {
     try {
       const { id } = req.params;
       const post = await Post.findByPk(id);
-      console.log(id);
+
       if (!post) return res.status(400).json('The post doesnt exist ');
 
       await post.update(
@@ -25,7 +25,6 @@ class ImagesController {
     try {
       const { id } = req.params;
       const user = await User.findByPk(id);
-      console.log(id);
 
       if (!user) return res.status(400).json('The user doesnt exist ');
 

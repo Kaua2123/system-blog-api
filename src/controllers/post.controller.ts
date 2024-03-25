@@ -29,7 +29,7 @@ class PostController {
           },
           {
             model: User,
-            attributes: ['username'],
+            attributes: ['username', 'image'],
           },
         ],
       });
@@ -66,7 +66,7 @@ class PostController {
           },
           {
             model: User,
-            attributes: ['username'],
+            attributes: ['username', 'image', 'image_url'],
           },
         ],
       });
