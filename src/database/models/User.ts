@@ -9,9 +9,11 @@ import Likes from './Likes';
 
 class User extends Model {
   declare id: number;
+  declare name: string;
   declare username: string;
   declare email: string;
   declare password: string;
+  declare image: string;
   declare password_hash: string;
 }
 
@@ -22,6 +24,11 @@ User.init(
       autoIncrement: true,
       allowNull: false,
       primaryKey: true,
+    },
+    name: {
+      type: sequelize.STRING,
+      allowNull: false,
+      unique: true,
     },
     username: {
       type: sequelize.STRING,
@@ -39,9 +46,11 @@ User.init(
       },
     },
     password_hash: {
+      allowNull: false,
       type: sequelize.STRING,
     },
     password: {
+      allowNull: false,
       type: sequelize.VIRTUAL,
       defaultValue: '',
       validate: {
@@ -49,6 +58,17 @@ User.init(
           args: [3, 24],
           msg: 'Senha deve ter entre 3 e 24 caracteres',
         },
+      },
+    },
+    image: {
+      type: sequelize.STRING,
+      allowNull: false,
+      defaultValue: '',
+    },
+    image_url: {
+      type: sequelize.VIRTUAL,
+      get() {
+        return `http://localhost:3001/images/${this.getDataValue('image')}`;
       },
     },
   },
@@ -60,7 +80,10 @@ User.init(
 );
 
 User.addHook('beforeSave', async (user: User) => {
-  user.password_hash = await bcrypt.hash(user.password, 8);
+  const password = user.getDataValue('password');
+  if (password) {
+    user.password_hash = await bcrypt.hash(password, 8);
+  }
 });
 
 User.hasMany(Post, {

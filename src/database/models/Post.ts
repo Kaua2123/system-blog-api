@@ -2,9 +2,9 @@ import sequelize from 'sequelize';
 import { Model } from 'sequelize';
 
 import Comment from './Comment';
+import Likes from './Likes';
 
 import db from '.';
-import Likes from './Likes';
 
 interface ENUM {
   TECNOLOGIA: string;

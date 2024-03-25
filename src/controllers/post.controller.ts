@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import Post from '../database/models/Post';
 import Comment from '../database/models/Comment';
 import Likes from '../database/models/Likes';
+import User from '../database/models/User';
 
 class PostController {
   async index(req: Request, res: Response, next: NextFunction) {
@@ -21,10 +22,16 @@ class PostController {
           ['id', 'DESC'],
           [Comment, 'id', 'DESC'],
         ],
-        include: {
-          model: Comment,
-          attributes: ['content'],
-        },
+        include: [
+          {
+            model: Comment,
+            attributes: ['content'],
+          },
+          {
+            model: User,
+            attributes: ['username'],
+          },
+        ],
       });
 
       return res.status(200).json(posts);
@@ -52,10 +59,16 @@ class PostController {
           ['id', 'DESC'],
           [Comment, 'id', 'DESC'],
         ],
-        include: {
-          model: Comment,
-          attributes: ['content'],
-        },
+        include: [
+          {
+            model: Comment,
+            attributes: ['content'],
+          },
+          {
+            model: User,
+            attributes: ['username'],
+          },
+        ],
       });
 
       console.log('checando post com show:', post);

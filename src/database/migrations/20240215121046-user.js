@@ -10,6 +10,10 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
       },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       username: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -23,6 +27,11 @@ module.exports = {
       password_hash: {
         type: Sequelize.STRING,
         allowNull: false,
+      },
+      image: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: '',
       },
     });
   },
