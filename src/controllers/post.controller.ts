@@ -17,6 +17,8 @@ class PostController {
           'image_url',
           'likes',
           'tags',
+          'created_at',
+          'updated_at',
         ],
         order: [
           ['id', 'DESC'],
@@ -54,6 +56,8 @@ class PostController {
           'image_url',
           'likes',
           'tags',
+          'created_at',
+          'updated_at',
         ],
         order: [
           ['id', 'DESC'],
