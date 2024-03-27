@@ -25,7 +25,7 @@ Comment.init(
   {
     sequelize: db,
     tableName: 'comments',
-    timestamps: false,
+    timestamps: true,
     underscored: true,
   },
 );

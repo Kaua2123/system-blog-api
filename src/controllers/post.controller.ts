@@ -66,7 +66,14 @@ class PostController {
         include: [
           {
             model: Comment,
-            attributes: ['content'],
+            attributes: [
+              'id',
+              'user_id',
+              'post_id',
+              'content',
+              'createdAt',
+              'updatedAt',
+            ],
           },
           {
             model: User,
