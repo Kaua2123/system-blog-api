@@ -74,6 +74,12 @@ class PostController {
               'createdAt',
               'updatedAt',
             ],
+            include: [
+              {
+                model: User,
+                attributes: ['username', 'image', 'image_url'],
+              },
+            ],
           },
           {
             model: User,

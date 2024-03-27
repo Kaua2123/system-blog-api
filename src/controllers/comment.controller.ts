@@ -1,10 +1,18 @@
 import { NextFunction, Request, Response } from 'express';
 import Comment from '../database/models/Comment';
+import User from '../database/models/User';
 
 class CommentController {
   async index(req: Request, res: Response, next: NextFunction) {
     try {
-      const comments = await Comment.findAll();
+      const comments = await Comment.findAll({
+        include: [
+          {
+            model: User,
+            attributes: ['username', 'image', 'image_url'],
+          },
+        ],
+      });
 
       return res.status(200).json(comments);
     } catch (error) {
