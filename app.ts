@@ -1,12 +1,14 @@
 import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import path from 'path';
+import delay from 'express-delay';
 
 import router from './src/routes/index';
 
 const app = express();
 
 app.use(express.json());
+app.use(delay(1000));
 app.use(cors());
 app.use(router);
 app.use(express.urlencoded({ extended: true }));

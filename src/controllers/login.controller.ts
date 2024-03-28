@@ -13,7 +13,7 @@ class LoginController {
       const user = await User.findOne({ where: { email } });
       if (!user) return res.status(400).json('User not found');
 
-      const { id, password_hash } = user;
+      const { id, name, password_hash } = user;
 
       const pass = await bcrypt.compare(password, password_hash);
       if (!pass) return res.status(400).json('Passwords do not match.');
@@ -21,9 +21,13 @@ class LoginController {
       if (!process.env.TOKEN_KEY)
         return res.status(400).json('No key for the token was provided');
 
-      const token = jwt.sign({ id, email: user.email }, process.env.TOKEN_KEY, {
-        expiresIn: process.env.TOKEN_EXPIRATION,
-      });
+      const token = jwt.sign(
+        { id, name, email: user.email },
+        process.env.TOKEN_KEY,
+        {
+          expiresIn: process.env.TOKEN_EXPIRATION,
+        },
+      );
 
       return res.status(200).json({ token });
     } catch (error) {
